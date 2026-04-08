@@ -11,7 +11,7 @@ import ProfileEdit from './components/ProfileEdit';
 import Companies from './components/admin/Companies';
 import ComapanyCreate from './components/admin/ComapanyCreate';
 import CompanySetup from './components/admin/CompanySetup';
-import JobAdmin from './components/admin/jobadmin';
+import JobAdmin from './components/admin/jobAdmin';
 import AdminJobCreate from './components/admin/AdminJobCreate';
 import JobApplicants from './components/admin/JobApplicants';
 import ProtectedRoute from './components/admin/ProtectedRoute';
