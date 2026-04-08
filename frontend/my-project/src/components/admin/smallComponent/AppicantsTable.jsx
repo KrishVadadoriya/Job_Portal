@@ -1,14 +1,17 @@
 
-import { Button } from '@/components/ui/button';
+
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Table, TableBody, TableCaption, TableCell, TableHeader, TableRow } from '@/components/ui/table'
-import store from '@/redux/store';
+import { setApplicants } from '@/redux/applicationSlice';
+
 import { APPLICATION_API_END_POINT } from '@/utils/constant';
 import axios from 'axios';
 import { MoreHorizontal } from 'lucide-react';
-import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+
 import { toast } from 'sonner';
 
 
@@ -18,20 +21,25 @@ const shortlistingStatus = ["Accepted", "Rejected"];
 
 export default function AppicantsTable() {
     const { applicants } = useSelector(store => store.application);
+    
+   
+     
     // const refreshPage = ()=>{
     //     window.location.reload();
     //  }
     const statusHandler = async (status, id) => {
         try {
+             axios.defaults.withCredentials = true;
             const res = await axios.post(`${APPLICATION_API_END_POINT}/status/${id}/update`, { status }, {
                 withCredentials: true,
             });
-            const refreshPage = ()=>{
-                window.location.reload();
-             }
+            console.log(res);
+            // const refreshPage = ()=>{
+            //     window.location.reload();
+            //  }
             if (res.data.success) {
                 toast.success(res.data.message);
-                refreshPage();
+               // refreshPage();
 
             }
         }
@@ -39,7 +47,7 @@ export default function AppicantsTable() {
             toast.error(error);
         }
     }
-    
+       
     return (
         <div>
             <Table>
@@ -56,7 +64,7 @@ export default function AppicantsTable() {
                 </TableHeader>
                 <TableBody>
                     {
-                        applicants && applicants?.applications.map((item) => (
+                        applicants && applicants?.applications?.map((item) => (
                             <tr>
                                 <TableCell> {item?.applicant?.fullname}</TableCell>
                                 <TableCell>{item?.applicant?.email}</TableCell>

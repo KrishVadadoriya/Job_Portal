@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import  { useEffect } from 'react'
 import Navbar from '../shared/navbar'
 import AppicantsTable from './smallComponent/AppicantsTable'
 import axios from 'axios'
@@ -8,25 +8,25 @@ import { setApplicants } from '@/redux/applicationSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
 export default function JobApplicants() {
-    const jobid=useParams().id;
+    const params=useParams();
     const dispatch=useDispatch();
-    const {applicants}=useSelector(store=>store.application)
+    const {applicants}=useSelector(store=>store.application);
+    
     useEffect(()=>{
+        
         const fetchAllApplicants=async()=>{
             try {
-                 const res=await axios.get(`${APPLICATION_API_END_POINT}/${jobid}/applicants`,{
+                 const res=await axios.get(`${APPLICATION_API_END_POINT}/${params.id}/applicants`,{
                     withCredentials:true,
                  });
-                 if(res.data.success)
-                 {
                     dispatch(setApplicants(res.data.jobApplications));
-                 }
-            } catch (error) {
+            } 
+            catch (error) {
                  console.log(error); 
             }
         }
         fetchAllApplicants();
-    },[],dispatch,jobid);
+    },[params.id,dispatch]);
   return (
     <div>
         <Navbar/>

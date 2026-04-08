@@ -25,12 +25,12 @@ export default function JobDescription() {
     const appliedJobHandler=async()=>{
         try{
            const res=await axios.get(`${APPLICATION_API_END_POINT}/apply/${jobId}`,{withCredentials:true});
-           
            if(res.data.success){
               setIsApplied(true);//update local data not for database
               const updateSingleJob={...singleJob,applications:[...singleJob.applications,{applicant:user?._id}]};
               dispatch(setSingleJobs(updateSingleJob)); //help to update real time ui change
               toast.success(res.data.message); 
+
            }
         }
         catch(err){
