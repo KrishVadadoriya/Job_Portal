@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Navbar from '../shared/navbar'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
-import { RadioGroup, RadioGroupItem } from '../ui/radio-group'
+import { RadioGroup } from '../ui/radio-group'
 import { Button } from '../ui/button'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
@@ -10,7 +10,7 @@ import axios from 'axios'
 import { USER_API_END_POINT } from '@/utils/constant'
 import { useDispatch, useSelector } from 'react-redux'
 import { setLoading, setUser } from '@/redux/authSlice'
-import store from '@/redux/store'
+
 import { Loader2 } from 'lucide-react'
 
 
@@ -95,7 +95,7 @@ export default function Login() {
                         loading ? <Button className="w-full my-4"><Loader2 className='mr-2 h-4 w-4 animated-spin' />Please wait</Button>: <Button type="submite" className="w-full my-4">Login</Button>
                     }
                    
-                    <span className='text-sm'>Don't have an Account? <Link to="/signup" className='text-blue-600'>signup</Link> </span>
+                    <span className='text-sm'> Don't have an Account? <Link to="/signup" className='text-blue-600'>signup</Link> </span>
                 </form>
             </div>
         </div>
